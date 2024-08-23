@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 #Author : Roman Shchiptsov, email: schiptsov.roman@gmail.com
 #File   : run_core.py
-#Revise : 17-07-2024
+#Revise : 25-07-2024
 #----------------------------------------------------------------------------
 # Численное моделирование нелинейной динамики пространственного заряда,
 # электрического поля и тока в структурах GaAs
@@ -11,9 +11,13 @@
 from numpy import zeros, float64, array, savetxt
 from app.core.algorithm import *
 from app.settings import WRITE_FREQUENCY, PROFILES_DICT
-from app.utils import read_profile
+from app.utils import read_data
 
 import time
+
+# def save_data(dictdata):
+#     for filename, data in dictdata.items():
+#         savetxt(SAVING_DATA_PATH / f"{filename}.scv", data, delimiter=',', fmt='%.6e')
 
 def run_core(U0, shr_j, shr_E, shr_ne, shr_p, shr_Gi,
                   sleep_time, should_terminate):
@@ -40,11 +44,8 @@ def run_core(U0, shr_j, shr_E, shr_ne, shr_p, shr_Gi,
     B_i = zeros(ArraySizePy, dtype=float64)
     #----------------------------------------------------------------------------
 
-    #savetxt('profiles/x.csv', x, delimiter=',', fmt='%.6e')
-    #savetxt('profiles/DATA51N.csv', Nd, delimiter=',', fmt='%.6e')
-
-    Nd = read_profile(PROFILES_DICT["DATA51N.csv"], 1)
-    ne0_x = read_profile(PROFILES_DICT["n0(x).txt"], 1)
+    Nd = read_data(PROFILES_DICT["DATA51N.csv"], 1)
+    ne0_x = read_data(PROFILES_DICT["n0(x).txt"], 1)
 
     E = E + U0.value/L
 

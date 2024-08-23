@@ -4,20 +4,23 @@
 #Revise : 16-07-2024
 #----------------------------------------------------------------------------
 
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets, QtGui, QtCore
 import time
 
 class SplashScreen(QtWidgets.QSplashScreen):
     def __init__(self, parent=None):
-        super().__init__(parent)
+        super().__init__(parent, flags=QtCore.Qt.WindowType.WindowStaysOnTopHint)
 
     def loadInitialization(self, parent: QtWidgets.QWidget, movie: QtGui.QMovie):
         movie.start()
         self.setPixmap(movie.currentPixmap())
         self.show()
         for i in range(500):
-            QtWidgets.QApplication.instance().processEvents()
             time.sleep(0.01)
             self.setPixmap(movie.currentPixmap())
+            QtWidgets.QApplication.instance().processEvents()
 
         self.finish(parent)
+
+    def mousePressEvent(self, event):
+        return

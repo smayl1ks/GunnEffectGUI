@@ -6,7 +6,7 @@
 
 from PyQt5 import QtWidgets, QtCore, QtGui
 from .DynamicPlot import DynamicPlot
-from app.utils import read_profile, create_Gi, validate_float
+from app.utils import read_data, create_Gi, validate_float
 from app.settings import IMG_DICT, PROFILES_DICT
 
 class SetOpticWindow(QtWidgets.QWidget):
@@ -24,7 +24,7 @@ class SetOpticWindow(QtWidgets.QWidget):
         self.setLayoutManagement()
 
         self.Gi = []
-        self.x = read_profile(nameFile=PROFILES_DICT["x.csv"], columns=1)
+        self.x = read_data(nameFile=PROFILES_DICT["x.csv"], columns=1)
         self.message_error = QtWidgets.QMessageBox()
 
     def createFigures(self):

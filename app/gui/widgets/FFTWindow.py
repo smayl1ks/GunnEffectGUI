@@ -40,7 +40,7 @@ class FFTWindow(QtWidgets.QWidget):
         self.main_box.addWidget(self.fft_plot)
 
     @QtCore.pyqtSlot()
-    def update_plot(self) -> None:
+    def update_plot(self):
         self.fftThread.jarray[:] = self.jt
         self.fftThread.start()
         if len(self.J) != 0:

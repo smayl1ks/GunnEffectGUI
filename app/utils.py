@@ -7,7 +7,7 @@
 import csv
 import numpy as np
 
-def read_profile(nameFile, columns):
+def read_data(nameFile, columns):
     """
     Function for reading data from files
     with csv extension. Data is written in columns
@@ -52,3 +52,6 @@ def validate_float(value, scale):
         return float(value) * scale
     except ValueError:
         raise ValueError("Данные должны иметь тип float")
+
+# def column_stack(array1, array2):
+#     return np.column_stack((array1, array2))

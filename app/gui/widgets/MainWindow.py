@@ -215,7 +215,7 @@ class MainWindow(QtWidgets.QWidget):
         try:
             self.U.value = validate_float(self.edit_U.text(), 1)
         except ValueError as e:
-            self.edit_U.setText(str(self.U.value))
+            self.edit_U.setNum(self.U.value)
             self.message_error.critical(self, "ERROR!", str(e))
 
     @QtCore.pyqtSlot()

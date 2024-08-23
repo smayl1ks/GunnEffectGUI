@@ -1,7 +1,7 @@
 from PyQt5 import QtCore
 from app.settings import WRITE_FREQUENCY
 from app.core.algorithm import t
-from numpy import fft, linspace, sort, copy
+from numpy import fft, linspace
 
 class fftThread(QtCore.QThread):
     fJ = QtCore.pyqtSignal(object, object)
@@ -17,7 +17,7 @@ class fftThread(QtCore.QThread):
             self.fx = list(linspace(0, self.fn * 1E-6, len(self.fy)))
 
             self.fy[0] = self.fy[0] / 2
-            self.fJ.emit(self.fx, self.fy)
+            self.fJ.emit(self.fx[1:], self.fy[1:])
 
     def run(self):
         self.FFT()

@@ -2,7 +2,7 @@ from pathlib import Path
 
 # Global data
 APP_NAME = "GunnEffectGUI"
-VERSION = "1.0.0"
+VERSION = "1.2.0"
 
 PROFILES_PATH = Path(__file__).parent / "profiles"
 PROFILES_DICT = {pathFILE.name: str(pathFILE)
@@ -15,6 +15,17 @@ IMG_DICT = {pathIMG.name: str(pathIMG)
 
 # Frequency for write to shared array
 WRITE_FREQUENCY = 30
+
+# For saving model data (all shared_data) current state.
+# When SAVING_STATE_DATA == CNT (counter in core) -> saving current data
+# If there is data, core runs with it
+SAVING_STATE_DATA_CNT = 100_000
+
+SAVING_DATA_PATH = Path().cwd() / "data" / "SAVING_STATE_DATA"
+SAVING_DATA_PATH.mkdir(parents=True, exist_ok=True)
+
+SAVING_DATA_DICT = {pathIMG.name: str(pathIMG)
+                    for pathIMG in SAVING_DATA_PATH.iterdir()}
 
 # Function for running gui and core
 from app.core.run_core import run_core
@@ -31,12 +42,18 @@ should_terminate = Value(c_bool, False)
 # Computing delay in core
 sleep_time = Value(c_int, 0)
 
-U0 = Value(c_double, 250.0)
-shr_j = Array(c_double, ArraySizePy // 2) # max lenght can be сhange
+U_START = 250.0
+U0 = Value(c_double, U_START)
+
+# max lenght can be сhange
+MAX_LENGHT_Jt = ArraySizePy // 2
+shr_j = Array(c_double, MAX_LENGHT_Jt)
+
 shr_E = Array(c_double, ArraySizePy)
 shr_ne = Array(c_double, ArraySizePy)
 shr_p = Array(c_double, ArraySizePy)
 shr_Gi = Array(c_double, ArraySizePy)
+
 # -->
 shared_data = (U0, shr_j, shr_E, shr_ne,
                shr_p, shr_Gi, sleep_time,

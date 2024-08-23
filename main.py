@@ -7,7 +7,7 @@
 # To run the GUI and core in different processes
 from multiprocessing import Process
 
-# This file includes all the settings to run program
+# This file includes all settings to run program
 from app.settings import *
 
 # Console mode (not created)

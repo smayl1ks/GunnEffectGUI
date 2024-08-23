@@ -1,7 +1,7 @@
 #----------------------------------------------------------------------------
 #Author : Roman Shchiptsov, email: schiptsov.roman@gmail.com
-#File   : figures.py
-#Revise : 18-07-2024
+#File   : LinearRegion.py
+#Revise : 20-07-2024
 #----------------------------------------------------------------------------
 
 import pyqtgraph as pg
